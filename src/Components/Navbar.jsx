@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import '../App.css'
-import { Pagination } from 'swiper/modules';
+import { Autoplay, Pagination } from 'swiper/modules';
 import logo from "../assets/web-logo.avif";
 import { DataContext } from './UserContext';
 
@@ -143,19 +143,31 @@ const toggleMenu = ()=> {
     </div>
 
   <div className='mb-6'>
-     <Swiper
-     
-        pagination={{
-          dynamicBullets: true,
-        }}
-        modules={[Pagination]}
-        className="mySwiper"
-      >
-        <SwiperSlide><img className='' src={slider1} alt="" /></SwiperSlide>
-        <SwiperSlide><img src={slider2} alt="" /></SwiperSlide>
-        <SwiperSlide><img src={slider3} alt="" /></SwiperSlide>
-        <SwiperSlide><img src={slider4} alt="" /></SwiperSlide>
-      </Swiper>
+<Swiper
+  pagination={{
+    dynamicBullets: true,
+    clickable: true, // optional: allows clicking bullets
+  }}
+  autoplay={{
+    delay: 3000, // 3 seconds per slide
+    disableOnInteraction: false, // continue autoplay after user interaction
+  }}
+  modules={[Pagination, Autoplay]}
+  className="mySwiper"
+>
+  <SwiperSlide>
+    <img src={slider1} alt="Slider 1" className="w-full object-cover" />
+  </SwiperSlide>
+  <SwiperSlide>
+    <img src={slider2} alt="Slider 2" className="w-full object-cover" />
+  </SwiperSlide>
+  <SwiperSlide>
+    <img src={slider3} alt="Slider 3" className="w-full object-cover" />
+  </SwiperSlide>
+  <SwiperSlide>
+    <img src={slider4} alt="Slider 4" className="w-full object-cover" />
+  </SwiperSlide>
+</Swiper>
   </div>
   
   </>
