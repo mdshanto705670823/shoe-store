@@ -5,6 +5,7 @@ import './App.css'
 import Navbar from './Components/Navbar'
 import { DataContext } from './Components/UserContext'
 import Home from './Components/Layouts/Home'
+import Footer from './Components/Footer'
 
 function App() {
     const {data,loading,error} = useContext(DataContext) 
@@ -16,6 +17,7 @@ function App() {
     <>
      <Navbar/>
      <Home/>
+     <Footer/>
    
     </>
   )

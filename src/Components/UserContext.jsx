@@ -4,6 +4,8 @@ const UserContext = ({children}) => {
     const [data,setData] = useState([])
     const [loading,setLoading] = useState(true)
     const [error, setError] = useState(null)
+    const [selectCat,setSelectCat] = useState("All")
+  
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -22,7 +24,7 @@ const UserContext = ({children}) => {
     }, []);
     
   return (
-    <DataContext.Provider value={{data,loading,error}}>
+    <DataContext.Provider value={{data,loading,error,selectCat,setSelectCat , }}>
       {children}
     </DataContext.Provider>
   )
