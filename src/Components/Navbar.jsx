@@ -7,10 +7,11 @@ import { Autoplay, Pagination } from 'swiper/modules';
 import logo from "../assets/web-logo.avif";
 import { DataContext } from './UserContext';
 
-import slider1 from '/slider2.webp'
-import slider2 from '/slide1.webp'
-import slider3 from '/slider3.jpg'
-import slider4 from '/slider4.jpg'
+
+import { Link, NavLink } from 'react-router-dom';
+import { FaBars, FaShoppingCart, FaUser } from 'react-icons/fa';
+import { IoCloseSharp } from 'react-icons/io5';
+import { MdFavorite } from 'react-icons/md';
 
 const Navbar = () => {
   const {selectCat,setSelectCat} = useContext(DataContext)
@@ -26,10 +27,13 @@ const toggleMenu = ()=> {
  const categories = ["All" , "men", "women" , "kid"]
     const link = (
         <>
-          <li>Home</li>
-          <li>Blog</li>
-          <li>Contact Us</li>
-          <li>About Us</li>
+          <NavLink to="/"><li>Home</li></NavLink>
+          <NavLink to="/blog"><li>Blog</li></NavLink>
+          <NavLink to="/contact"><li>Contact Us</li></NavLink>
+          <NavLink to="/about">  <li>About Us</li></NavLink>
+          
+          
+        
         </>)
         const link2 =(
         <>
@@ -45,13 +49,15 @@ const toggleMenu = ()=> {
       <div className="relative">
   
   <div onClick={toggleMenu} className="btn btn-ghost md:hidden">
-    {menu ? "close" : "open"}
+    {menu ? <IoCloseSharp /> : <FaBars />}
   </div>
 
   
   {menu && (
-    <ul className="absolute top-full z-1000 mt-3 left-0 text-gray-500  w-60 bg-white shadow-md min-h-screen">
-      {link}
+    <ul className="absolute top-full z-1000 mt-3 left-0 text-black font-myfont font-medium rounded-xl  w-60 bg-white shadow-md ">
+      <div className='flex flex-col flex-wrap justify-center m-6'>
+        {link}
+      </div>
     </ul>
   )}
 </div>
@@ -94,12 +100,12 @@ const toggleMenu = ()=> {
         <div className="flex justify-center items-center">
           <div onClick={toggleCat}  className="btn btn-ghost">
     {cat ?   <div  className='flex justify-center items-center gap-3'>
-      <p>close</p>
+      <IoCloseSharp />
       <a className="text-lg  font-bold font-myfont2  uppercase">
            categories
           </a>
     </div> :    <div className='flex justify-center items-center gap-3'>
-      <p>open</p>
+      <FaBars />
       <a className="text-lg  font-bold font-myfont2  uppercase">
            categories
           </a>
@@ -111,10 +117,12 @@ const toggleMenu = ()=> {
    
     <>
       
-    <ul className="absolute top-full mt-3 left-0 text-gray-500  w-60 bg-white shadow-md min-h-screen">
-      {categories.map(singleCat =>(
+    <ul className="absolute top-full mt-3 left-0 text-gray-500  w-60 ">
+     <div className='flex flex-col  gap-5 my-3'>
+       {categories.map(singleCat =>(
         <p className='btn' key={singleCat} onClick={()=>setSelectCat(singleCat)}> {singleCat}</p>
       ))}
+     </div>
       
     </ul>
     </>
@@ -125,16 +133,32 @@ const toggleMenu = ()=> {
       </div>
       <div className='navbar-center'>
         
-        <ul className="menu menu-horizontal hidden md:flex gap-6 uppercase ">
-         <p>Search bar</p>
+        <ul className=" text-white  w-28 md:w-full  ">
+         <label className="input">
+  <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <g
+      strokeLinejoin="round"
+      strokeLinecap="round"
+      strokeWidth="2.5"
+      fill="none"
+      stroke="currentColor"
+    >
+      <circle cx="11" cy="11" r="8"></circle>
+      <path d="m21 21-4.3-4.3"></path>
+    </g>
+  </svg>
+  <input type="search" className='text-white  ' required placeholder="Search" />
+</label>
         </ul>
       </div>
       <div className="navbar-end ">
-       <div className='flex flex-col justify-center '>
-       <p  className='text-end'>
-          add to cart+fevorite+user
-         
-        </p>
+       
+      <div className='flex lg:text-3xl text-xl md:text-2xl justify-center items-center gap-4'>
+        <FaShoppingCart />
+        <MdFavorite />
+        <FaUser />
+        
+      
         
        </div>
       
@@ -143,31 +167,7 @@ const toggleMenu = ()=> {
     </div>
 
   <div className='mb-6'>
-<Swiper
-  pagination={{
-    dynamicBullets: true,
-    clickable: true, // optional: allows clicking bullets
-  }}
-  autoplay={{
-    delay: 3000, // 3 seconds per slide
-    disableOnInteraction: false, // continue autoplay after user interaction
-  }}
-  modules={[Pagination, Autoplay]}
-  className="mySwiper"
->
-  <SwiperSlide>
-    <img src={slider1} alt="Slider 1" className="w-full object-cover" />
-  </SwiperSlide>
-  <SwiperSlide>
-    <img src={slider2} alt="Slider 2" className="w-full object-cover" />
-  </SwiperSlide>
-  <SwiperSlide>
-    <img src={slider3} alt="Slider 3" className="w-full object-cover" />
-  </SwiperSlide>
-  <SwiperSlide>
-    <img src={slider4} alt="Slider 4" className="w-full object-cover" />
-  </SwiperSlide>
-</Swiper>
+
   </div>
   
   </>
