@@ -6,6 +6,7 @@ import Home from './Layouts/Home'
 import Blog from './Layouts/Blog'
 import About from './Layouts/About'
 import Contact from './Layouts/Contact'
+import Details from './Layouts/Details'
 
 const router = createBrowserRouter([
     {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
             {
                 path: "/contact",
                 element: <Contact/>
+            },
+            {
+                path: "/product/:id",
+                element: <Details/>
             }
         ]
     }

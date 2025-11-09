@@ -64,9 +64,9 @@ const toggleMenu = ()=> {
 
         <div className="flex justify-center items-center">
           <img className="w-5 rounded-full" src={logo} alt="" />
-          <a className="text-lg italic font-bold  uppercase">
+          <Link to='/' className="text-lg italic font-bold  uppercase">
            Kick-fusion
-          </a>
+          </Link>
         </div>
       </div>
       <div className='navbar-center'>
@@ -120,7 +120,7 @@ const toggleMenu = ()=> {
     <ul className="absolute top-full mt-3 left-0 text-gray-500  w-60 ">
      <div className='flex flex-col  gap-5 my-3'>
        {categories.map(singleCat =>(
-        <p className='btn' key={singleCat} onClick={()=>setSelectCat(singleCat)}> {singleCat}</p>
+        <p className='btn capitalize' key={singleCat} onClick={()=>setSelectCat(singleCat)}> {singleCat}</p>
       ))}
      </div>
       
@@ -133,7 +133,7 @@ const toggleMenu = ()=> {
       </div>
       <div className='navbar-center'>
         
-        <ul className=" text-white  w-28 md:w-full  ">
+        <ul className=" text-black  w-28 md:w-full  ">
          <label className="input">
   <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <g
@@ -147,7 +147,7 @@ const toggleMenu = ()=> {
       <path d="m21 21-4.3-4.3"></path>
     </g>
   </svg>
-  <input type="search" className='text-white  ' required placeholder="Search" />
+  <input type="search" className='text-black  ' required placeholder="Search" />
 </label>
         </ul>
       </div>

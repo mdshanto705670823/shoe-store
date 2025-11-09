@@ -11,6 +11,9 @@ import slider1 from '/slider2.webp'
 import slider2 from '/slide1.webp'
 import slider3 from '/slider3.jpg'
 import slider4 from '/slider4.jpg'
+import { FaShoppingCart } from 'react-icons/fa';
+import { MdFavorite } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
     const {data,loading,error,selectCat,setSelectCat , showMore,setShowMore } = useContext(DataContext)
@@ -18,17 +21,21 @@ const Home = () => {
     const topRatingProducts = data.filter(product => product.ratings > 9)
     console.log(topRatingProducts)
     const visibleData = showMore ? filterProducts : filterProducts.slice(0,8)
+    const navigate = useNavigate()
+    const handleDetails = (id) =>{
+      navigate(`/product/${id}`)
+    }
     
   return (
     <>  
     <Swiper
   pagination={{
     dynamicBullets: true,
-    clickable: true, // optional: allows clicking bullets
+    clickable: true, 
   }}
   autoplay={{
-    delay: 3000, // 3 seconds per slide
-    disableOnInteraction: false, // continue autoplay after user interaction
+    delay: 3000, 
+    disableOnInteraction: false, 
   }}
   modules={[Pagination, Autoplay]}
   className="mySwiper"
@@ -54,37 +61,36 @@ const Home = () => {
                  visibleData.map(singledata=> (
                     <div key={singledata.id} >
                      <div >
-          <div className="card bg-base-300 shadow-sm ">
-           <figure className="p-10 transition-transform delay-100 hover:scale-105">
+          <div className="card bg-base-300 shadow-sm text-black ">
+           <figure onClick={() => handleDetails(singledata.id)}className="p-10 transition-transform delay-100 hover:scale-105">
              <img
                src={singledata.image}
                alt="Shoes"
                className="rounded-xl w-full" />
            </figure>
            <div className="card-body items-center text-center">
-             <h2 className="card-title font-myfont2"> {singledata.name} </h2>
-            <div className='flex justify-center gap-26 font-myfont3'>
-            <div className='flex'>
-               <p className='uppercase '>price: </p>
-             <p>${singledata.price}</p>
-            </div>
-            <div>
-              <p className='uppercase'>color</p>
-              <p>{singledata.color}</p>
-            </div>
+             <h2 className="card-title md:text-xl lg:text-2xl  font-myfont2"> {singledata.name} </h2>
+           
+            
+               
+             <p className='text-2xl font-myfont2 text-blue-700'>${singledata.price}</p>
+            
 
-            </div>
-            <div className='flex justify-center items-center font-myfont3 gap-2'>
+          
+            <div className='flex justify-center items-center font-myfont3 gap-2 text-xl'>
               <p className=''>Ratings:</p>
-              <p>{singledata.ratings}</p>
+              <p className='text-green-500'>{singledata.ratings}</p>
 
             </div>
-             <div className="card-actions">
-               <button className="btn bg-blue-600 text-white font-myfont3 rounded-4xl transition-transform delay-75 hover:border-yellow-300 hover:border-2 hover:scale-105">Buy Now</button>
-               <button className="btn bg-blue-600 text-white font-myfont3 rounded-4xl transition-transform delay-75 hover:border-yellow-300 hover:border-2 hover:scale-105">Favorite</button>
+             <div className="card-actions text-4xl gap-12">
+             <FaShoppingCart className='text-red-500' />
+                   <MdFavorite className='text-yellow-500' />
              </div>
            </div>
-         </div> 
+         <button onClick={() => handleDetails(singledata.id)} className='btn btn-secondary capitalize'>
+          veiw details
+          </button> 
+         </div>
          </div>               
    </div>
                  ))
@@ -129,44 +135,38 @@ const Home = () => {
 >
   {topRatingProducts.map((p) => (
     <SwiperSlide key={p.id}>
-      <div className="card bg-base-300 rounded-none shadow-sm w-full h-full flex flex-col justify-between">
-        <figure className="p-5 transition-transform duration-200 hover:scale-105">
-          <img
-            src={p.image}
-            alt={p.name}
-            className="rounded-xl w-full object-cover aspect-square"
-          />
-        </figure>
-        <div className="card-body items-center text-center flex flex-col gap-2">
-          <h2 className="card-title font-myfont2 text-lg md:text-xl">
-            {p.name}
-          </h2>
+   <div className=" bg-base-300 shadow-sm text-black ">
+           <figure onClick={() => handleDetails(p.id)}className="p-10 transition-transform delay-100 hover:scale-105">
+             <img
+               src={p.image}
+               alt="Shoes"
+               className="rounded-xl w-full" />
+           </figure>
+           <div className="card-body items-center text-center">
+             <h2 className="card-title md:text-xl lg:text-2xl  font-myfont2"> {p.name} </h2>
+           
+            
+               
+             <p className='text-2xl font-myfont2 text-blue-700'>${p.price}</p>
+            
 
-          <div className="flex justify-center gap-8 text-sm md:text-base font-myfont3">
-            <div className="flex items-center gap-1">
-              <p className="uppercase">Price:</p>
-              <p>${p.price}</p>
+          
+            <div className='flex justify-center items-center font-myfont3 gap-2 text-xl'>
+              <p className=''>Ratings:</p>
+              <p className='text-green-500'>{p.ratings}</p>
+
             </div>
-            <div>
-              <p className="uppercase">Color</p>
-              <p>{p.color}</p>
-            </div>
-          </div>
-          <div className="flex justify-center items-center font-myfont3 gap-2">
-            <p>Ratings:</p>
-            <p>{p.ratings}</p>
-          </div>
-          <div className="flex justify-center flex-wrap gap-3 mt-3">
-            <button className="btn bg-blue-600 text-white font-myfont3 rounded-full transition-transform hover:border-yellow-300 hover:border-2 hover:scale-105">
-              Buy Now
-            </button>
-            <button className="btn bg-blue-600 text-white font-myfont3 rounded-full transition-transform hover:border-yellow-300 hover:border-2 hover:scale-105">
-              Favorite
-            </button>
-          </div>
-        </div>
-      </div>
-    </SwiperSlide>
+             <div className="card-actions text-4xl gap-12">
+             <FaShoppingCart className='text-red-500' />
+                   <MdFavorite className='text-yellow-500' />
+             </div>
+           </div>
+         <button onClick={() => handleDetails(p.id)} className='btn btn-secondary capitalize'>
+          veiw details
+          </button> 
+         </div>
+</SwiperSlide>
+
   ))}
 </Swiper>
         </div>
