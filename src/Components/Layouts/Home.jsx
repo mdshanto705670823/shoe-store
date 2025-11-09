@@ -53,7 +53,7 @@ const Home = () => {
     <img src={slider4} alt="Slider 4" className="w-full object-cover" />
   </SwiperSlide>
 </Swiper>
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 my-3'>
        
             {
                 
@@ -62,26 +62,21 @@ const Home = () => {
                     <div key={singledata.id} >
                      <div >
           <div className="card bg-base-300 shadow-sm text-black ">
-           <figure onClick={() => handleDetails(singledata.id)}className="p-10 transition-transform delay-100 hover:scale-105">
+           <figure onClick={() => handleDetails(singledata.id)}className=" transition-transform delay-100 hover:scale-105">
              <img
                src={singledata.image}
                alt="Shoes"
                className="rounded-xl w-full" />
            </figure>
            <div className="card-body items-center text-center">
-             <h2 className="card-title md:text-xl lg:text-2xl  font-myfont2"> {singledata.name} </h2>
-           
-            
-               
-             <p className='text-2xl font-myfont2 text-blue-700'>${singledata.price}</p>
-            
-
-          
+             <h2 className="card-title md:text-2xl lg:text-xl  font-myfont2"> {singledata.name} </h2>               
+           <div className='flex justify-center items-center gap-4'>
+              <p className='text-xl font-myfont2 text-blue-700'>${singledata.price}</p>          
             <div className='flex justify-center items-center font-myfont3 gap-2 text-xl'>
               <p className=''>Ratings:</p>
               <p className='text-green-500'>{singledata.ratings}</p>
-
             </div>
+           </div>
              <div className="card-actions text-4xl gap-12">
              <FaShoppingCart className='text-red-500' />
                    <MdFavorite className='text-yellow-500' />
@@ -115,14 +110,14 @@ const Home = () => {
   )
 )}     
         </div>
-        <div className='my-10'>
-    <Swiper
+        
+  <Swiper
   slidesPerView={1}
-  spaceBetween={20}
-  loop={true} 
+  spaceBetween={10}
+  loop={true}
   autoplay={{
-    delay: 2500, 
-    disableOnInteraction: false, 
+    delay: 2500,
+    disableOnInteraction: false,
   }}
   pagination={{ clickable: true }}
   breakpoints={{
@@ -131,45 +126,57 @@ const Home = () => {
     1280: { slidesPerView: 4 },
   }}
   modules={[Pagination, Autoplay]}
-  className="mySwiper py-6"
+  
 >
   {topRatingProducts.map((p) => (
-    <SwiperSlide key={p.id}>
-   <div className=" bg-base-300 shadow-sm text-black ">
-           <figure onClick={() => handleDetails(p.id)}className="p-10 transition-transform delay-100 hover:scale-105">
-             <img
-               src={p.image}
-               alt="Shoes"
-               className="rounded-xl w-full" />
-           </figure>
-           <div className="card-body items-center text-center">
-             <h2 className="card-title md:text-xl lg:text-2xl  font-myfont2"> {p.name} </h2>
-           
-            
-               
-             <p className='text-2xl font-myfont2 text-blue-700'>${p.price}</p>
-            
+    <SwiperSlide className='w-64' key={p.id}>
+      <div className="card bg-base-300 shadow-sm text-black rounded-lg overflow-hidden flex flex-col justify-between h-full hover:shadow-md transition-all duration-300">
+        
+        <figure
+          onClick={() => handleDetails(p.id)}
+          className="cursor-pointer overflow-hidden rounded-md"
+        >
+          <img
+            src={p.image}
+            alt="Shoes"
+            className="rounded-md w-full  object-cover transition-transform duration-300 hover:scale-105"
+          />
+        </figure>
 
-          
-            <div className='flex justify-center items-center font-myfont3 gap-2 text-xl'>
-              <p className=''>Ratings:</p>
-              <p className='text-green-500'>{p.ratings}</p>
+        <div className="card-body items-center text-center p-2 gap-1">
+          <h2 className="card-title text-sm sm:text-base md:text-lg font-myfont2 leading-tight">
+            {p.name}
+          </h2>
 
+          <div className="flex justify-center items-center gap-2">
+            <p className="text-base sm:text-lg font-myfont2 text-blue-700">
+              ${p.price}
+            </p>
+            <div className="flex justify-center items-center font-myfont3 gap-1 text-sm">
+              <p>Ratings:</p>
+              <p className="text-green-500">{p.ratings}</p>
             </div>
-             <div className="card-actions text-4xl gap-12">
-             <FaShoppingCart className='text-red-500' />
-                   <MdFavorite className='text-yellow-500' />
-             </div>
-           </div>
-         <button onClick={() => handleDetails(p.id)} className='btn btn-secondary capitalize'>
-          veiw details
-          </button> 
-         </div>
-</SwiperSlide>
+          </div>
 
+          <div className="card-actions text-xl sm:text-2xl gap-6 mt-1">
+            <FaShoppingCart className="text-red-500 cursor-pointer hover:scale-110 transition-transform" />
+            <MdFavorite className="text-yellow-500 cursor-pointer hover:scale-110 transition-transform" />
+          </div>
+        </div>
+
+        <button
+          onClick={() => handleDetails(p.id)}
+          className="btn btn-secondary btn-xs sm:btn-sm capitalize mt-2"
+        >
+          View Details
+        </button>
+      </div>
+    </SwiperSlide>
   ))}
 </Swiper>
-        </div>
+
+
+       
     </>
   )
 }
