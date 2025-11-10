@@ -6,6 +6,9 @@ const UserContext = ({children}) => {
     const [error, setError] = useState(null)
     const [selectCat,setSelectCat] = useState("All")
     const [showMore,setShowMore] = useState(false)
+    const [search , setSearch] = useState("")
+    const [addToCart, setAddToCart] = useState([])
+    const [wishlist ,setWitshlist] = useState([])
   
     useEffect(() => {
         const fetchData = async () => {
@@ -23,9 +26,38 @@ const UserContext = ({children}) => {
     
         fetchData(); 
     }, []);
+
+
+       const cart = (p) =>{
+      setAddToCart ((prev)=>{
+        const existItem = prev.find((item) => item.id === p.id)
+        if(existItem){
+          return prev.map((item) => 
+          item.id === p.id ? {...item, quantity: (item.quantity || 1) +1}: item )
+        }
+        else {
+          return [...prev, {...p,quantity: 1}]
+        }
+      })
+    }
+    
+    const removeCart = (id) =>{
+      setAddToCart((prev) => prev.filter((item) => item.id !==id))
+    }
+    const decrementQty = (id) => {
+  setAddToCart((prev) =>
+    prev
+      .map((item) =>
+        item.id === id
+          ? { ...item, quantity: (item.quantity || 1) - 1 } 
+          : item
+      )
+      .filter((item) => item.quantity > 0) 
+  );
+};
     
   return (
-    <DataContext.Provider value={{data,loading,error,selectCat,setSelectCat , showMore,setShowMore }}>
+    <DataContext.Provider value={{data,loading,error,selectCat,setSelectCat , showMore,setShowMore,search,setSearch,addToCart, setAddToCart,wishlist ,setWitshlist,cart,removeCart,decrementQty }}>
       {children}
     </DataContext.Provider>
   )

@@ -14,10 +14,11 @@ import { IoCloseSharp } from 'react-icons/io5';
 import { MdFavorite } from 'react-icons/md';
 
 const Navbar = () => {
-  const {selectCat,setSelectCat} = useContext(DataContext)
+  const {selectCat,setSelectCat, search, setSearch, addToCart,cart} = useContext(DataContext)
     
 const [menu ,setMenu] =useState(false)
 const [cat,setCat] = useState(false)
+
 const toggleCat = ()=>{
   setCat(!cat)
 }
@@ -25,6 +26,10 @@ const toggleMenu = ()=> {
     setMenu(!menu)
 }
  const categories = ["All" , "men", "women" , "kid"]
+  const handleSearch = (e) => {
+    setSearch(e.target.value.toLowerCase());
+  };
+ console.log(addToCart)
     const link = (
         <>
           <NavLink to="/"><li>Home</li></NavLink>
@@ -93,8 +98,6 @@ const toggleMenu = ()=> {
     <div className="navbar  z-100 sticky top-0 shadow-md text-black bg-white ">
       <div className="navbar-start">
       <div className="relative">
-  
- 
 </div>
 
         <div className="flex justify-center items-center">
@@ -111,12 +114,8 @@ const toggleMenu = ()=> {
           </a>
     </div>}
   </div>
-
-  
   {cat && (
-   
-    <>
-      
+    <> 
     <ul className="absolute top-full mt-3 left-0 text-gray-500  w-60 ">
      <div className='flex flex-col  gap-5 my-3'>
        {categories.map(singleCat =>(
@@ -126,15 +125,13 @@ const toggleMenu = ()=> {
       
     </ul>
     </>
-  )}
-        
-          
+  )}     
         </div>
       </div>
       <div className='navbar-center'>
         
         <ul className=" text-black  w-28 md:w-full  ">
-   <label className="flex items-center w-full max-w-lg  bg-black/70 rounded-full shadow-sm focus-within:ring-2 focus-within:ring-primary transition-all px-4 py-2 gap-3">
+   <label onSubmit={()=>handleSearch} className="flex items-center w-full max-w-lg  bg-black/70 rounded-full shadow-sm focus-within:ring-2 focus-within:ring-primary transition-all px-4 py-2 gap-3">
   <svg
     className="h-5 w-5 text-gray-300"
     xmlns="http://www.w3.org/2000/svg"
@@ -148,34 +145,32 @@ const toggleMenu = ()=> {
     <circle cx="11" cy="11" r="8" />
     <path d="m21 21-4.3-4.3" />
   </svg>
-
   <input
     type="search"
+    value={search}
+    onChange={(e)=> setSearch(e.target.value)}
     placeholder="Search"
     required
     className="w-full bg-transparent outline-none text-base text-white/70 placeholder-gray-300"
   />
 </label>
-
         </ul>
       </div>
       <div className="navbar-end ">
-       
       <div className='flex lg:text-3xl text-xl md:text-2xl justify-center items-center gap-4'>
-        <FaShoppingCart />
-        <MdFavorite />
         <FaUser />
-        
-      
-        
+       <Link to="/cart">
+        <FaShoppingCart className="text-2xl" />
+          {addToCart.length > 0 && (
+            <span className="absolute top-10 right-10 bg-red-500 text-white rounded-full text-xs px-1">
+               {addToCart.reduce((sum, item) => sum + (item.quantity || 0), 0)}
+            </span>
+          )}
+       </Link>
+        <MdFavorite />
        </div>
-      
       </div>
-      
     </div>
-
- 
-  
   </>
   )
 }

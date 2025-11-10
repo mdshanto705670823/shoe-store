@@ -16,8 +16,15 @@ import { MdFavorite } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
-    const {data,loading,error,selectCat,setSelectCat , showMore,setShowMore } = useContext(DataContext)
-    const filterProducts = selectCat === "All" ? data : data.filter(p => p.category === selectCat)
+    const {data,selectCat,setSelectCat,showMore,setShowMore,search,setSearch,cart,removeCart,clearCart } = useContext(DataContext)
+    const filterProducts = data.filter(p => {
+  const matchCategory = selectCat === "All" || p.category === selectCat;
+  const matchSearch =
+    !search ||
+    p.name.toLowerCase().includes(search) ||
+    p.description.toLowerCase().includes(search);
+  return matchCategory && matchSearch;
+});
     const topRatingProducts = data.filter(product => product.ratings > 9)
     console.log(topRatingProducts)
     const visibleData = showMore ? filterProducts : filterProducts.slice(0,8)
@@ -25,6 +32,8 @@ const Home = () => {
     const handleDetails = (id) =>{
       navigate(`/product/${id}`)
     }
+
+    
     
   return (
     <>  
@@ -78,7 +87,7 @@ const Home = () => {
             </div>
            </div>
              <div className="card-actions text-4xl gap-12">
-             <FaShoppingCart className='text-red-500' />
+             <FaShoppingCart onClick={()=> cart(singledata)} className='text-red-500' />
                    <MdFavorite className='text-yellow-500' />
              </div>
            </div>
@@ -159,7 +168,7 @@ const Home = () => {
           </div>
 
           <div className="card-actions text-xl sm:text-2xl gap-6 mt-1">
-            <FaShoppingCart className="text-red-500 cursor-pointer hover:scale-110 transition-transform" />
+            <FaShoppingCart onClick={()=> cart(p)} className='text-red-500' />
             <MdFavorite className="text-yellow-500 cursor-pointer hover:scale-110 transition-transform" />
           </div>
         </div>
