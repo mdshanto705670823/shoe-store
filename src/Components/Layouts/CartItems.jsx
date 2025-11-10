@@ -7,7 +7,7 @@ const CartItems = () => {
 
  
   if (addToCart.length === 0) {
-    return <p className="text-center mt-8">Your cart is empty</p>;
+    return <p className="text-center my-2 text-gray-300 text-lg">Your cart is empty</p>;
   }
 
  

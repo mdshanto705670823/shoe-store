@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import './App.css'
 import Navbar from './Components/Navbar'
 import { DataContext } from './Components/UserContext'
-import Home from './Components/Layouts/Home'
+
 import Footer from './Components/Footer'
 import { DNA } from 'react-loader-spinner';
 import { Outlet } from 'react-router-dom'

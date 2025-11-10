@@ -40,10 +40,13 @@ const UserContext = ({children}) => {
         }
       })
     }
+
+  
     
     const removeCart = (id) =>{
       setAddToCart((prev) => prev.filter((item) => item.id !==id))
     }
+   
     const decrementQty = (id) => {
   setAddToCart((prev) =>
     prev
@@ -54,10 +57,38 @@ const UserContext = ({children}) => {
       )
       .filter((item) => item.quantity > 0) 
   );
+
+};
+ const wish = (p) => {
+  setWitshlist((prev) => {
+    const existItem = prev.find((item) => item.id === p.id);
+    if (existItem) {
+    
+      return prev.filter((item) => item.id !== p.id);
+    } else {
+  
+      return [...prev, { ...p, quantity: 1 }];
+    }
+  });
+};
+    const removeWish = (id) => {
+  setWitshlist((prev) => prev.filter((item) => item.id !== id));
+};
+
+const decrementQtyOfWish = (id) => {
+  setWitshlist((prev) =>
+    prev
+      .map((item) =>
+        item.id === id
+          ? { ...item, quantity: (item.quantity || 1) - 1 }
+          : item
+      )
+      .filter((item) => item.quantity > 0)
+  );
 };
     
   return (
-    <DataContext.Provider value={{data,loading,error,selectCat,setSelectCat , showMore,setShowMore,search,setSearch,addToCart, setAddToCart,wishlist ,setWitshlist,cart,removeCart,decrementQty }}>
+    <DataContext.Provider value={{data,loading,error,selectCat,setSelectCat , showMore,setShowMore,search,setSearch,addToCart, setAddToCart,wishlist ,setWitshlist,cart,removeCart,decrementQty,wish,removeWish,decrementQtyOfWish }}>
       {children}
     </DataContext.Provider>
   )

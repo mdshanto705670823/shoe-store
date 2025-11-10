@@ -4,7 +4,7 @@ import { DataContext } from "../UserContext";
 
 function Details() {
   const { id } = useParams();
-  const { data, loading } = useContext(DataContext);
+  const { data, loading,cart,wish } = useContext(DataContext);
 
   if (loading) {
     return (
@@ -78,10 +78,10 @@ function Details() {
 
         
         <div className="flex gap-4 mt-8">
-          <button className="btn bg-green-500 hover:bg-green-600 text-white w-1/2">
+          <button onClick={()=> cart(product)} className="btn bg-green-500 hover:bg-green-600 text-white w-1/2">
             Add to Cart 🛒
           </button>
-          <button className="btn bg-yellow-400 hover:bg-yellow-500 text-black w-1/2">
+          <button onClick={()=> wish(product)} className="btn bg-yellow-400 hover:bg-yellow-500 text-black w-1/2">
             Add to Wishlist ❤️
           </button>
         </div>

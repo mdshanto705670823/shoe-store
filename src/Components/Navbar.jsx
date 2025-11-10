@@ -1,20 +1,16 @@
 import React, { useContext, useState } from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import '../App.css'
-import { Autoplay, Pagination } from 'swiper/modules';
 import logo from "../assets/web-logo.avif";
 import { DataContext } from './UserContext';
-
-
 import { Link, NavLink } from 'react-router-dom';
 import { FaBars, FaShoppingCart, FaUser } from 'react-icons/fa';
 import { IoCloseSharp } from 'react-icons/io5';
 import { MdFavorite } from 'react-icons/md';
 
 const Navbar = () => {
-  const {selectCat,setSelectCat, search, setSearch, addToCart,cart} = useContext(DataContext)
+  const {selectCat,setSelectCat, search, setSearch, addToCart,cart,wish,wishlist } = useContext(DataContext)
     
 const [menu ,setMenu] =useState(false)
 const [cat,setCat] = useState(false)
@@ -29,7 +25,7 @@ const toggleMenu = ()=> {
   const handleSearch = (e) => {
     setSearch(e.target.value.toLowerCase());
   };
- console.log(addToCart)
+
     const link = (
         <>
           <NavLink to="/"><li>Home</li></NavLink>
@@ -167,7 +163,15 @@ const toggleMenu = ()=> {
             </span>
           )}
        </Link>
-        <MdFavorite />
+        <Link to="/wish">
+          <MdFavorite />
+           {wishlist.length > 0 && (
+  <span className="absolute top-10 right-1 bg-red-500 text-white rounded-full text-xs px-1">
+    {wishlist.length}
+  </span>
+)}
+
+        </Link>
        </div>
       </div>
     </div>

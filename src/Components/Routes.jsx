@@ -8,6 +8,7 @@ import About from './Layouts/About'
 import Contact from './Layouts/Contact'
 import Details from './Layouts/Details'
 import CartItems from './Layouts/CartItems'
+import WishList from './Layouts/WishList'
 
 const router = createBrowserRouter([
     {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
             {
                 path: "/cart",
                 element: <CartItems/>
+            },
+            {
+                path: "/wish",
+                element: <WishList/>
             }
         ]
     }
