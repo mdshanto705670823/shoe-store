@@ -15,6 +15,7 @@ import { FaShoppingCart } from 'react-icons/fa';
 import { MdFavorite } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import About from './About';
+import Blog from './Blog';
 
 const Home = () => {
     const {data,selectCat,setSelectCat,showMore,setShowMore,search,setSearch,cart,removeCart,clearCart, wish} = useContext(DataContext)
@@ -201,7 +202,7 @@ const Home = () => {
     ))}
   </Swiper>
   </div>
-  
+  <Blog/>
   <About />
 </>
 
