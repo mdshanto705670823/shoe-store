@@ -9,6 +9,7 @@ import { FaBars, FaShoppingCart, FaUser } from 'react-icons/fa';
 import { IoCloseSharp } from 'react-icons/io5';
 import { MdFavorite } from 'react-icons/md';
 
+
 const Navbar = () => {
   const {selectCat,setSelectCat, search, setSearch, addToCart,cart,wish,wishlist } = useContext(DataContext)
     
@@ -32,17 +33,13 @@ const toggleMenu = ()=> {
           <NavLink to="/blog"><li>Blog</li></NavLink>
           <NavLink to="/contact"><li>Contact Us</li></NavLink>
           <NavLink to="/about">  <li>About Us</li></NavLink>
+            <NavLink to="/dashboard"><li>Dashboard</li></NavLink>
           
           
         
         </>)
-        const link2 =(
-        <>
-          <li>Men</li>
-          <li>Women</li>
-          <li>Kids</li>
-        </>
-        )
+       
+
   return (
     <>
     <div className="navbar z-1000 shadow-md text-white bg-blue-600">
@@ -154,7 +151,10 @@ const toggleMenu = ()=> {
       </div>
       <div className="navbar-end ">
       <div className='flex lg:text-3xl text-xl md:text-2xl justify-center items-center gap-4'>
-        <FaUser />
+       
+        <Link to="/login">
+         <FaUser  />
+        </Link>
        <Link to="/cart">
         <FaShoppingCart className="text-2xl" />
           {addToCart.length > 0 && (

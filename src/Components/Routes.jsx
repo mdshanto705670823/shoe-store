@@ -9,6 +9,10 @@ import Contact from './Layouts/Contact'
 import Details from './Layouts/Details'
 import CartItems from './Layouts/CartItems'
 import WishList from './Layouts/WishList'
+import Login from './Layouts/Login'
+import PrivateRoute from './PrivateRoute'
+import Dashboard from './Layouts/Dashboard'
+import SingleBlog from './Layouts/SingleBlog'
 
 const router = createBrowserRouter([
     {
@@ -42,8 +46,24 @@ const router = createBrowserRouter([
             {
                 path: "/wish",
                 element: <WishList/>
+            },
+            {
+                path: "/dashboard",
+                element:(
+                    <PrivateRoute>
+                        <Dashboard/>
+                    </PrivateRoute>
+                )
+            },
+            {
+                path: "/blog/:id",
+                element: <SingleBlog/>
             }
         ]
+    },
+    {
+        path: "/login",
+        element: <Login></Login>
     }
 ])
 const Routes = () => {

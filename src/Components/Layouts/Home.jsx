@@ -14,6 +14,7 @@ import slider4 from '/slider4.jpg'
 import { FaShoppingCart } from 'react-icons/fa';
 import { MdFavorite } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
+import About from './About';
 
 const Home = () => {
     const {data,selectCat,setSelectCat,showMore,setShowMore,search,setSearch,cart,removeCart,clearCart, wish} = useContext(DataContext)
@@ -59,7 +60,7 @@ const Home = () => {
     </SwiperSlide>
   </Swiper>
 
-  {/* Product Grid */}
+  
   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
     {visibleData.length > 0 ? (
       visibleData.map((item) => (
@@ -143,8 +144,8 @@ const Home = () => {
 
       <h1 className=' text-black text-4xl font-myfont2 font-bold text-center my-2'>Top Rated Shoes</h1>
   
-  
-  <Swiper
+  <div className='mb-6'>
+    <Swiper
     slidesPerView={1}
     spaceBetween={10}
     loop={true}
@@ -161,7 +162,7 @@ const Home = () => {
     
     {topRatingProducts.map((p) => (
       
-      <SwiperSlide key={p.id}>
+      <SwiperSlide  key={p.id}>
         <div className="bg-base-200 shadow-md overflow-hidden flex flex-col h-full hover:shadow-lg transition-shadow duration-300">
           <figure
             onClick={() => handleDetails(p.id)}
@@ -199,6 +200,9 @@ const Home = () => {
       </SwiperSlide>
     ))}
   </Swiper>
+  </div>
+  
+  <About />
 </>
 
   )

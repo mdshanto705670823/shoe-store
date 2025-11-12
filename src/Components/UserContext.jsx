@@ -9,6 +9,7 @@ const UserContext = ({children}) => {
     const [search , setSearch] = useState("")
     const [addToCart, setAddToCart] = useState([])
     const [wishlist ,setWitshlist] = useState([])
+    
   
     useEffect(() => {
         const fetchData = async () => {
@@ -86,9 +87,23 @@ const decrementQtyOfWish = (id) => {
       .filter((item) => item.quantity > 0)
   );
 };
+
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("user")) || null
+  );
+
+  const login = (name,email, password) => {
+   
+   setUser(name)
+  };
+
+  const logout = () => {
+    setUser(null);
+    
+  };
     
   return (
-    <DataContext.Provider value={{data,loading,error,selectCat,setSelectCat , showMore,setShowMore,search,setSearch,addToCart, setAddToCart,wishlist ,setWitshlist,cart,removeCart,decrementQty,wish,removeWish,decrementQtyOfWish }}>
+    <DataContext.Provider value={{data,loading,error,selectCat,setSelectCat , showMore,setShowMore,search,setSearch,addToCart, setAddToCart,wishlist ,setWitshlist,cart,removeCart,decrementQty,wish,removeWish,decrementQtyOfWish, user,setUser,login,logout }}>
       {children}
     </DataContext.Provider>
   )
