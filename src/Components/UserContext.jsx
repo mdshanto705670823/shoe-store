@@ -101,9 +101,18 @@ const decrementQtyOfWish = (id) => {
     setUser(null);
     
   };
+  const users = [
+    {
+      id: 1,
+      name: "Shanto",
+      role: "user",
+      email: "shanto@gmail.com"
+    }
+  
+  ]
     
   return (
-    <DataContext.Provider value={{data,loading,error,selectCat,setSelectCat , showMore,setShowMore,search,setSearch,addToCart, setAddToCart,wishlist ,setWitshlist,cart,removeCart,decrementQty,wish,removeWish,decrementQtyOfWish, user,setUser,login,logout }}>
+    <DataContext.Provider value={{data,loading,error,selectCat,setSelectCat , showMore,setShowMore,search,setSearch,addToCart, setAddToCart,wishlist ,setWitshlist,cart,removeCart,decrementQty,wish,removeWish,decrementQtyOfWish, user,setUser,login,logout,users }}>
       {children}
     </DataContext.Provider>
   )

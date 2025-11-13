@@ -13,6 +13,7 @@ import Login from './Layouts/Login'
 import PrivateRoute from './PrivateRoute'
 import Dashboard from './Layouts/Dashboard'
 import SingleBlog from './Layouts/SingleBlog'
+import TotalProducts from './Layouts/TotalProducts'
 
 const router = createBrowserRouter([
     {
@@ -56,6 +57,12 @@ const router = createBrowserRouter([
                 )
             },
             {
+                path:"/totalProducts",
+                element: <PrivateRoute>
+                    <TotalProducts/>
+                </PrivateRoute>
+            },
+            {
                 path: "/blog/:id",
                 element: <SingleBlog/>
             }
@@ -66,12 +73,6 @@ const router = createBrowserRouter([
         element: <Login></Login>
     }
 ])
-const Routes = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+
 
 export default router
