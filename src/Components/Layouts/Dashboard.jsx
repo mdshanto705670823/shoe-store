@@ -10,7 +10,7 @@ import {
 } from "react-icons/fa";
 import { Line } from "react-chartjs-2";
 import "chart.js/auto";
-import { h1 } from "motion/react-client";
+
 import { Link } from "react-router-dom";
 
 const Dashboard = () => {
@@ -107,7 +107,7 @@ const Dashboard = () => {
                 Total Products
               </p>
              
-              <p className="text-lg text-black md:text-xl font-bold">{data.length}</p>
+              <p className="text-lg text-black md:text-xl font-bold">{data?.length}</p>
             </div>
           </div>
 
@@ -117,7 +117,7 @@ const Dashboard = () => {
               <p className="text-gray-500 text-sm md:text-base">
                 Total Orders
               </p>
-              <p  className="text-lg text-black md:text-xl font-bold">{addToCart.length}</p>
+              <p  className="text-lg text-black md:text-xl font-bold">{addToCart?.length}</p>
             </div>
           </div>
 
@@ -127,7 +127,7 @@ const Dashboard = () => {
               <p className="text-gray-500 text-sm md:text-base">
                 Wishlist Items
               </p>
-              <p className="text-lg text-black md:text-xl font-bold">{wishlist.length}</p>
+              <p className="text-lg text-black md:text-xl font-bold">{wishlist?.length}</p>
             </div>
           </div>
 
@@ -135,7 +135,7 @@ const Dashboard = () => {
             <FaUsers className="text-2xl md:text-3xl text-yellow-500" />
             <div>
               <p className="text-gray-500 text-sm md:text-base">Total Users</p>
-              <p className="text-lg text-black md:text-xl font-bold">{users.length}</p>
+              <p className="text-lg text-black md:text-xl font-bold">{users?.length}</p>
             </div>
           </div>
         </div>
@@ -165,16 +165,21 @@ const Dashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {addToCart.slice(-5).map((item, index) => (
-                  <tr key={index} className="border-b text-black hover:bg-gray-50">
-                    <td className="px-4 py-2">{item.name}</td>
-                    <td className="px-4 py-2">{users.map(u=>(
-                      <h1 key={u.id}>{u.name}</h1>
-                    ))}</td>
-                    <td className="px-4 py-2">{item.quantity || 1}</td>
-                    <td className="px-4 py-2">${item.price}</td>
-                  </tr>
-                ))}
+                {addToCart?.slice(-5)?.map((item, index) => (
+  <tr key={index} className="border-b text-black hover:bg-gray-50">
+    <td className="px-4 py-2">{item.name}</td>
+
+    <td className="px-4 py-2">
+      {users?.map((u) => (
+        <h1 key={u.id}>{u.name}</h1>
+      ))}
+    </td>
+
+    <td className="px-4 py-2">{item.quantity || 1}</td>
+    <td className="px-4 py-2">${item.price}</td>
+  </tr>
+))}
+
               </tbody>
             </table>
           </div>

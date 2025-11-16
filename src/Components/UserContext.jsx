@@ -9,6 +9,8 @@ const UserContext = ({children}) => {
     const [search , setSearch] = useState("")
     const [addToCart, setAddToCart] = useState([])
     const [wishlist ,setWitshlist] = useState([])
+   
+
     
   
     useEffect(() => {
@@ -88,31 +90,34 @@ const decrementQtyOfWish = (id) => {
   );
 };
 
-  const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("user")) || null
-  );
+ const [user, setUser] = useState(null);
 
-  const login = (name,email, password) => {
-   
-   setUser(name)
-  };
+const userEmail = "shanto@gmail.com";
+const userName = "Shanto";
+const userPassword = "123456";
 
-  const logout = () => {
-    setUser(null);
-    
-  };
-  const users = [
-    {
-      id: 1,
-      name: "Shanto",
-      role: "user",
-      email: "shanto@gmail.com"
-    }
-  
-  ]
+// Corrected login function
+const login = (email, name, password) => {
+  if (email === userEmail && name === userName && password === userPassword) {
+    setUser({
+      name: userName,
+      email: userEmail,
+    });
+
+    return { success: true };
+  } else {
+    return { success: false, message: "Invalid email, name or password" };
+  }
+};
+
+const logout = () => {
+  setUser(null);
+};
+
+
     
   return (
-    <DataContext.Provider value={{data,loading,error,selectCat,setSelectCat , showMore,setShowMore,search,setSearch,addToCart, setAddToCart,wishlist ,setWitshlist,cart,removeCart,decrementQty,wish,removeWish,decrementQtyOfWish, user,setUser,login,logout,users }}>
+    <DataContext.Provider value={{data,loading,error,selectCat,setSelectCat , showMore,setShowMore,search,setSearch,addToCart, setAddToCart,wishlist ,setWitshlist,cart,removeCart,decrementQty,wish,removeWish,decrementQtyOfWish, user,setUser,login,logout }}>
       {children}
     </DataContext.Provider>
   )

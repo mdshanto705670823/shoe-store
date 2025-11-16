@@ -8,6 +8,7 @@ import { DataContext } from './Components/UserContext'
 import Footer from './Components/Footer'
 import { DNA } from 'react-loader-spinner';
 import { Outlet } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
     const {data,loading,error} = useContext(DataContext) 
@@ -30,6 +31,7 @@ function App() {
   return (
     <>
      <Navbar/>
+     <Toaster/>
      <Outlet/>
      <Footer/>
    
